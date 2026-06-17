@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+}
+
+.slider-container{
+    position:relative;
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.slider{
+    display:flex;
+    transition:transform 0.5s ease-in-out;
+}
+
+.slide{
+    min-width:100%;
+}
+
+.slide img{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+    display:block;
+}
+
+.prev, .next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,0.5);
+    color:white;
+    border:none;
+    padding:12px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.prev{ left:10px; }
+.next{ right:10px; }
+</style>
+</head>
+
+<body>
+
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide">
+            <a href="https://tusitio.com/cursos">
+                <img src="imagenes/banner1.jpg" alt="Cursos">
+            </a>
+        </div>
+
+        <div class="slide">
+            <a href="https://tusitio.com/calendario">
+                <img src="imagenes/banner2.jpg" alt="Calendario">
+            </a>
+        </div>
+
+        <div class="slide">
+            <a href="https://tusitio.com/recursos">
+                <img src="imagenes/banner3.jpg" alt="Recursos">
+            </a>
+        </div>
+    </div>
+
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
+</div>
+
+<script>
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(index){
+    slider.style.transform = `translateX(-${index * 100}%)`;
+}
+
+document.querySelector('.next').addEventListener('click',()=>{
+    current = (current + 1) % slides.length;
+    showSlide(current);
+});
+
+document.querySelector('.prev').addEventListener('click',()=>{
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+});
+
+setInterval(()=>{
+    current = (current + 1) % slides.length;
+    showSlide(current);
+},5000);
+</script>
+
+</body>
+</html>
